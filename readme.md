@@ -16,11 +16,20 @@
 * clone the repository from 'https://github.com/Mbiyu2017/Myhood.git'
 * Create a `.gitignore` file in your project root and include the virtual environment inside the file
 * create a `requirements.txt` inside your projects root folder
-* Start a django project inside your folder. Remember to include the period after the name of the project
+* Install the dependecies listed in requirements.txt file
   ```bash
-    django-admin startproject <name_of_project> .
+      pip install -r requirements.txt
   ```
-*
+* Choose the database of your choice to connect to the app. Personally I used postgres for this project.
+* If you choose to use postgres, you'll need to install the CLI for postgres then go to you terminal and create a database for the app.
+* To connect to postgres
+  '''bash
+    psql
+  '''
+* To create the database
+  '''bash
+    CREATE DATABASE <name_of_database>
+  '''
 {Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? Do I need to install any dependencies? How should I set up my databases? Is there other code this app depends on?}
 ## Known Bugs
 {Are there issues that have not yet been resolved that you want to let users know you know? Outline any issues that would impact use of your application. Share any workarounds that are in place. }
