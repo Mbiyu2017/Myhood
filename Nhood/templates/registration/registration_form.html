@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container row">
+  <div class="col-md-3"></div>
+  <div class="card col-md-6">
+    <div class="card-header bg-danger text-white">
+      <h5><b>Register</b></h5>
+    </div>
+    <div class="card-body">
+      {% bootstrap_form form %}
+      <a href="#" class="btn btn-outline-danger btn-block">Sign Up</a>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+{% endblock %}
