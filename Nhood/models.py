@@ -13,7 +13,6 @@ class Neighbourhood(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
     hood = models.ForeignKey(Neighbourhood, null=True)
     email = models.EmailField(max_length=254)
 
