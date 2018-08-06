@@ -11,16 +11,16 @@ class Neighbourhood(models.Model):
     occupants = models.IntegerField()
     admin = models.CharField(max_length=30)
 
-class Userprofile(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    hood = models.ForeignKey(Neighbourhood)
+    hood = models.ForeignKey(Neighbourhood, null=True)
     email = models.EmailField(max_length=254)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Userprofile.objects.create(user=instance)
+        Profile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
@@ -28,6 +28,6 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Business(models.Model):
     name = models.CharField(max_length=30)
-    user = models.ForeignKey(Userprofile)
+    user = models.ForeignKey(Profile)
     neighbourhood = models.ForeignKey(Neighbourhood)
     email = models.EmailField(max_length=254)

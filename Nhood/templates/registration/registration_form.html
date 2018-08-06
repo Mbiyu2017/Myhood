@@ -8,8 +8,15 @@
       <h5><b>Register</b></h5>
     </div>
     <div class="card-body">
-      {% bootstrap_form form %}
-      <a href="#" class="btn btn-outline-danger btn-block">Sign Up</a>
+      <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-outline-danger btn-block" value="Sign Up">
+        <input type="hidden" name="next" value="{{next}}">
+    </form>
+    </div>
+    <div class="card-footer">
+      <p class="text-center"><b>Already have an account? Login <a href="accounts/login">here</a></b></p>
     </div>
   </div>
   <div class="col-md-3"></div>
