@@ -11,11 +11,16 @@ class Neighbourhood(models.Model):
     occupants = models.IntegerField()
     admin = models.CharField(max_length=30)
 
+    def __str__(cls):
+        return cls.name
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     hood = models.ForeignKey(Neighbourhood, null=True)
     email = models.EmailField(max_length=254)
 
+    def __str__(cls):
+        return cls.user
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -30,3 +35,6 @@ class Business(models.Model):
     user = models.ForeignKey(Profile)
     neighbourhood = models.ForeignKey(Neighbourhood)
     email = models.EmailField(max_length=254)
+
+    def __str__(cls):
+        return cls.name
