@@ -8,14 +8,18 @@ from django.dispatch import receiver
 class Neighbourhood(models.Model):
     name = models.CharField(max_length=30)
     location = models.CharField(max_length=50)
-    occupants = models.IntegerField()
-    admin = models.CharField(max_length=30)
+    occupants = models.IntegerField(null=True)
+    admin = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(cls):
         return cls.name
 
+    @classmethod
+    def get_nhoods(cls):
+        return cls.objects.all()
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="Profile")
     hood = models.ForeignKey(Neighbourhood, null=True)
     email = models.EmailField(max_length=254)
 

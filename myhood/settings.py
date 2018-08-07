@@ -41,6 +41,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 INSTALLED_APPS = [
     'Nhood',
     'bootstrap4',
+    'semanticui_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
