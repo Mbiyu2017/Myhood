@@ -18,6 +18,10 @@ class Neighbourhood(models.Model):
     def get_nhoods(cls):
         return cls.objects.all()
 
+    @classmethod
+    def join_nhood(cls,n_id):
+        nhood = Neighbourhood.objects.get(pk=n_id)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="Profile")
     hood = models.ForeignKey(Neighbourhood, null=True)

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+  {% include 'navbar.html' %}
+  <div class="ui grid">
+    <div class="four wide column"></div>
+
+      <div class="ui success message eight wide column" style="margin-top: 65px;">
+        <i class="close icon"></i>
+        <div class="header">
+          You have successfully joined {{nhood.name}} neighbourhood.
+        </div>
+      </div>
+
+    <div class="four wide column"></div>
+  </div>
+
+  {% endblock %}

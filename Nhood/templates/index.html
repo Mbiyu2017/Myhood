@@ -11,8 +11,8 @@
 
 <div class="ui grid">
   <div class="six wide column">
-    <div class="ui medium header">
-      Add your neighbourhood here
+    <div class="ui medium header center aligned">
+      Add your neighbourhood here <i class="hand point down icon"></i>
     </div>
     <form class="ui form" action="{% url 'index' %}" method="post">
       {% csrf_token %}
@@ -30,9 +30,10 @@
 
   <div class="ten wide column">
     {% for nhood in nhoods %}
-    <button class="large ui button">
-      {{nhood.name}}
-    </button>
+    <a class="large ui violet button vertical animated" tabindex="0" href="{% url 'join_nhood' n_id=nhood.pk %}">
+      <div class="visible content">{{nhood.name}}</div>
+      <div class="hidden content">Join {{nhood.name}}</div>
+    </a>
     {% endfor %}
   </div>
 </div>

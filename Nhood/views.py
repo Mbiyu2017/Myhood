@@ -14,3 +14,7 @@ def index(request):
         nhoods = Neighbourhood.get_nhoods()
         return render(request, 'index.html', {"form":form,"nhoods":nhoods})
     return render(request, 'index.html', {"form":form,"nhoods":nhoods})
+
+def join_nhood(request, n_id):
+    nhood = Neighbourhood.join_nhood(n_id)
+    return render(request, 'nhood.html', {"nhood":nhood})
