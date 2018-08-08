@@ -1,0 +1,20 @@
+/* .carindex{
+  height: 75vh;
+  width: 100vw;
+  margin: 0;
+}
+.carindex img{
+  height:75vh;
+  width: 100vw;
+  background-size: cover;
+} */
+.carousel-inner{
+  width: 100vw;
+  height: 80vh;
+}
+.carousel-inner img{
+  background-size: cover;
+}
+.ui .menu{
+  color: white;
+}

@@ -1,1 +1,44 @@
-<h1>My neighbourhood</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+{% include 'navbar.html' %}
+{% include 'carousel.html' %}
+  <div class="ui large header icon center aligned" id="hoods">
+    <i class="circular users icon"></i>
+    Neighbourhoods
+  </div>
+
+<div class="ui grid">
+  <div class="six wide column">
+    <div class="ui raised segment" style="margin:10px;">
+      <div class="ui medium header center aligned">
+        Add your neighbourhood here <i class="hand point down icon"></i>
+      </div>
+      <hr>
+      <form class="ui form" action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="ui inverted violet button animated" type="submit">
+          <div class="visible content">
+            Add neighbourhood
+          </div>
+          <div class="hidden content">
+            <i class="plus circle icon"></i>
+          </div>
+        </button>
+      </form>
+      </div>
+  </div>
+
+  <div class="ten wide column">
+    {% for nhood in nhoods %}
+    <a class="large ui violet button vertical animated" tabindex="0" href="{% url 'join_nhood' n_id=nhood.pk %}">
+      <div class="visible content">{{nhood.name}}</div>
+      <div class="hidden content">Join {{nhood.name}}</div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+<!-- Add neighbourhood form -->
+{% endblock %}
