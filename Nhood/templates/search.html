@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+  {% if businesses %}
+  <div class="ui grid">
+    <div class="four wide column"></div>
+      <div class="ui positive message transition eight wide column" style="margin-top:60px;">
+        <i class="close icon"></i>
+        <div class="header">
+          <h4 class="ui header">We found {{businesses|length}} businesses for your search</h4>
+        </div>
+      </div>
+    <div class="four wide column"></div>
+  </div>
+
+    {% for business in businesses %}
+    <div class="ui raised segment" style="margin:20px;">
+      <h2 class="ui header">{{business.name}}</h2>
+      <hr>
+      <i class="envelope icon"><b>Email</b></i>
+       <p>{{business.email}}</p>
+      <h5 class="ui header right aligned">Owned by {{business.owner|upper}} <i class="user icon"></i> </h5>
+    </div>
+    {% endfor %}
+
+  {% else %}
+  <div class="ui grid">
+    <div class="four wide column"></div>
+      <div class="ui negative message transition eight wide column" style="margin-top:60px;">
+        <i class="close icon"></i>
+        <div class="header">
+          <h4 class="ui header">Sorry, We didn't find anything that matched your search!</h4>
+        </div>
+      </div>
+    <div class="four wide column"></div>
+  </div>
+  {% endif %}
+{% endblock%}

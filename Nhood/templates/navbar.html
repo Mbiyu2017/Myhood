@@ -11,9 +11,9 @@
     Neighbourhoods
   </a>
   <div class="right menu">
-    <form class="item ui search">
+    <form class="item ui search" method="get" action="{% url 'search' %}">
       <div class="ui icon input">
-        <input type="text" placeholder="Search..." class="prompt">
+        <input name="term" type="search" placeholder="Search..." class="prompt">
         <i class="search link icon"></i>
       </div>
     </form>

@@ -46,6 +46,10 @@ class Business(models.Model):
     neighbourhood = models.ForeignKey(Neighbourhood)
     email = models.EmailField(max_length=254)
 
+    @classmethod
+    def search_business(cls,term):
+        return cls.objects.filter(name__icontains=term)
+
     def __str__(cls):
         return cls.name
 

@@ -49,3 +49,10 @@ def userprofile(request):
             form = BusinessForm()
         return render(request, 'userprofile.html', {"user":current_user, "form":form})
     return render(request, 'userprofile.html', {"user":current_user, "form":form})
+
+def search(request):
+    if 'term' in request.GET and request.GET['term']:
+        term = request.GET.get('term')
+        businesses = Business.search_business(term)
+        print(businesses,term)
+        return render(request, 'search.html',{"businesses":businesses})
