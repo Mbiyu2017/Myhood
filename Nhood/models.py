@@ -24,7 +24,7 @@ class Neighbourhood(models.Model):
         return nhood
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="Profile")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     hood = models.ForeignKey(Neighbourhood, null=True)
     email = models.EmailField(max_length=254)
 
@@ -45,6 +45,16 @@ class Business(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     neighbourhood = models.ForeignKey(Neighbourhood)
     email = models.EmailField(max_length=254)
+
+    def __str__(cls):
+        return cls.name
+
+class Event(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(blank=True)
+    details = models.TextField()
+    nhood = models.ForeignKey(Neighbourhood)
+    poster = models.ForeignKey(User, on_delete=models.CASCADE, related_name="poster")
 
     def __str__(cls):
         return cls.name

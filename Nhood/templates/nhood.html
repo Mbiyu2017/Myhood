@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bootstrap4 %}
 {% block content%}
   {% include 'navbar.html' %}
   {% if nhood %}
@@ -30,11 +31,20 @@
   </div>
   {% endif %}
   <div class="ui grid">
-    <div class="four wide column"></div>
-    <div class="eight wide column center aligned">
+    <div class="five wide column ui raised segment" style="margin:20px;">
+      <h3 class="ui header">Do you know anything happening in {{nhood.name}}?</h3>
+      <h4 class="ui header">Feel free to post it here</h4>
+      <form class="ui form" action="{% url 'join_nhood' n_id=nhood.pk %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="ui button medium violet inverted ">Create Event</button>
+      </form>
+    </div>
+
+    <div class="ten wide column ui center aligned">
       <h2 class="ui header">Updates from {{nhood.name}}</h2>
     </div>
-    <div class="four wide column"></div>
+
   </div>
 
   {% endblock %}

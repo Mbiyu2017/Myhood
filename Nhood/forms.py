@@ -10,3 +10,8 @@ class BusinessForm(ModelForm):
     class Meta:
         model = Business
         exclude = ['owner']
+
+class EventForm(ModelForm):
+    class Meta:
+        model = Event
+        exclude = ['poster','nhood']
