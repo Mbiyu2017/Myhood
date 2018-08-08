@@ -20,7 +20,8 @@ class Neighbourhood(models.Model):
 
     @classmethod
     def join_nhood(cls,n_id):
-        nhood = Neighbourhood.objects.get(pk=n_id)
+        nhood = cls.objects.get(pk=n_id)
+        return nhood
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="Profile")
@@ -29,6 +30,7 @@ class Profile(models.Model):
 
     def __str__(cls):
         return cls.user
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -40,7 +42,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Business(models.Model):
     name = models.CharField(max_length=30)
-    user = models.ForeignKey(Profile)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     neighbourhood = models.ForeignKey(Neighbourhood)
     email = models.EmailField(max_length=254)
 

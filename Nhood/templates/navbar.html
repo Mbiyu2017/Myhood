@@ -1,31 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="ui secondary top fixed menu inverted violet">
+<div class="ui secondary top fixed menu inverted  violet">
   <div class="header item">
-    My HOOD
+    MY HOOD
   </div>
-  <a class="item" href="{% url 'index' %}">
+  <a class="item active" href="{% url 'index' %}">
     Home
   </a>
-  <a class="item">
-    Messages
-  </a>
-  <a class="item active">
-    Friends
+  <a class="item" href="#hoods">
+    Neighbourhoods
   </a>
   <div class="right menu">
-    <form class="item">
+    <form class="item ui search">
       <div class="ui icon input">
-        <input type="text" placeholder="Search...">
+        <input type="text" placeholder="Search..." class="prompt">
         <i class="search link icon"></i>
       </div>
     </form>
+    {% if request.user.is_authenticated %}
+      <a class="ui item" href="{% url 'userprofile' %}">
+        Account
+      </a>
+      <a class="ui item" href="accounts/logout">
+        Logout
+      </a>
+    {% else %}
     <a class="ui item" href="accounts/register">
       Register
     </a>
-    <a class="ui item">
-      Logout
-    </a>
+    {% endif %}
   </div>
 </div>
+
 {% endblock %}

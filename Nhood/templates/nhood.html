@@ -2,6 +2,7 @@
 {% load static %}
 {% block content%}
   {% include 'navbar.html' %}
+  {% if nhood %}
   <div class="ui grid">
     <div class="four wide column"></div>
 
@@ -12,6 +13,27 @@
         </div>
       </div>
 
+    <div class="four wide column"></div>
+  </div>
+  {% else %}
+  <div class="ui grid">
+    <div class="four wide column"></div>
+
+      <div class="ui negative message eight wide column" style="margin-top: 65px;">
+        <i class="close icon"></i>
+        <div class="header">
+          Sorry, that neighbourhood does not exist
+        </div>
+      </div>
+
+    <div class="four wide column"></div>
+  </div>
+  {% endif %}
+  <div class="ui grid">
+    <div class="four wide column"></div>
+    <div class="eight wide column center aligned">
+      <h2 class="ui header">Updates from {{nhood.name}}</h2>
+    </div>
     <div class="four wide column"></div>
   </div>
 

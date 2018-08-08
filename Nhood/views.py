@@ -18,3 +18,16 @@ def index(request):
 def join_nhood(request, n_id):
     nhood = Neighbourhood.join_nhood(n_id)
     return render(request, 'nhood.html', {"nhood":nhood})
+
+def userprofile(request):
+    current_user = request.user
+    form = BusinessForm()
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.owner = current_user
+            business.save()
+            form = BusinessForm()
+        return render(request, 'userprofile.html', {"user":current_user, "form":form})
+    return render(request, 'userprofile.html', {"user":current_user, "form":form})
