@@ -34,7 +34,7 @@
     <div class="five wide column ui raised segment" style="margin:20px;">
       <h3 class="ui header">Do you know anything happening in {{nhood.name}}?</h3>
       <h4 class="ui header">Feel free to post it here</h4>
-      <form class="ui form" action="{% url 'join_nhood' n_id=nhood.pk %}" method="post">
+      <form class="ui form" action="{% url 'join_nhood' n_id=nhood.pk %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         <button type="submit" class="ui button medium violet inverted ">Create Event</button>
@@ -43,6 +43,23 @@
 
     <div class="ten wide column ui center aligned">
       <h2 class="ui header">Updates from {{nhood.name}}</h2>
+      <hr>
+      {% for event in events %}
+        <div class="ui card">
+          <div class="content">
+            Posted by <i class="user circle icon"></i>{{event.poster}}
+          </div>
+          {% if event.image %}
+          <div class="image">
+            <img src="{{event.image.url}}" alt="event image">
+          </div>
+          {% endif %}
+          <div class="content">
+            {{event.details}}
+          </div>
+
+        </div>
+      {% endfor %}
     </div>
 
   </div>

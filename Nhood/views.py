@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from .forms import *
+
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def index(request):
     current_user = request.user
     nhoods = Neighbourhood.get_nhoods()
@@ -16,12 +19,14 @@ def index(request):
         return render(request, 'index.html', {"form":form,"nhoods":nhoods})
     return render(request, 'index.html', {"form":form,"nhoods":nhoods})
 
+@login_required(login_url='/accounts/login/')
 def join_nhood(request, n_id):
     nhood = Neighbourhood.join_nhood(n_id)
+    events = Event.get_events()
     form = EventForm()
     current_user = request.user
     if request.method == 'POST':
-        form = EventForm(request.POST)
+        form = EventForm(request.POST,request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
             event.nhood = nhood
@@ -29,8 +34,9 @@ def join_nhood(request, n_id):
             event.save()
             form = EventForm()
         return render(request, 'nhood.html', {"nhood":nhood,"form":form})
-    return render(request, 'nhood.html', {"nhood":nhood,"form":form})
+    return render(request, 'nhood.html', {"nhood":nhood,"form":form,"events":events})
 
+@login_required(login_url='/accounts/login/')
 def userprofile(request):
     current_user = request.user
     form = BusinessForm()

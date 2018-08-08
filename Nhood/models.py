@@ -51,10 +51,14 @@ class Business(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=50)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True,upload_to='uploads/')
     details = models.TextField()
     nhood = models.ForeignKey(Neighbourhood)
     poster = models.ForeignKey(User, on_delete=models.CASCADE, related_name="poster")
+
+    @classmethod
+    def get_events(cls):
+        return cls.objects.all()
 
     def __str__(cls):
         return cls.name

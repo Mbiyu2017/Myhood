@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="ui raised positive message">
-  <i class="close icon"></i>
-  <div class="header">
-    You have succesfully activated your account.
+<div class="ui grid">
+  <div class="four wide column"></div>
+  <div class="ui raised positive message eight wide column">
+    <i class="close icon"></i>
+    <div class="header">
+      You have succesfully activated your account.
+    </div>
+    <p>Click <b><a href="/accounts/login">here</a></b> to login</p>
   </div>
-  <p>Click <b><a href="/accounts/login">here</a></b> to login</p>
+  <div class="two wide column"></div>
 </div>
 {% endblock %}
