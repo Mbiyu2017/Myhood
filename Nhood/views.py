@@ -23,6 +23,7 @@ def index(request):
 def join_nhood(request, n_id):
     nhood = Neighbourhood.join_nhood(n_id)
     events = Event.get_events()
+    
     form = EventForm()
     commForm = CommentForm()
     current_user = request.user
@@ -60,11 +61,12 @@ def search(request):
         return render(request, 'search.html',{"businesses":businesses})
 
 def comment(request,event_id):
+    event=Event.objects.get(pk=event_id)
     if request.method == 'POST':
-        commForm = CommentForm()
+        commForm = CommentForm(request.POST)
         comment = commForm.save(commit=False)
-        comment.event = Comment.get_comments(event_id)
+        comment.event = event
         comment.save()
         commForm = CommentForm()
 
-        return redirect('join_nhood')
+        return redirect(join_nhood,n_id=event.nhood.id)

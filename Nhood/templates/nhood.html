@@ -45,25 +45,35 @@
       <h2 class="ui header">Updates from {{nhood.name}}</h2>
       <hr>
       {% for event in events %}
-        <div class="ui card">
+        <div class="ui raised segment">
           <div class="content">
-            Posted by <i class="user circle icon"></i>{{event.poster}}
+            <b>Posted by <i class="user circle icon"></i>{{event.poster}}</b>
+            <hr>
           </div>
           {% if event.image %}
           <div class="image">
             <img src="{{event.image.url}}" alt="event image">
           </div>
           {% endif %}
-          <div class="content">
+          <div class="ui segment">
             {{event.details}}
           </div>
-          <div class="content">
-            <form class="ui large transparent left icon input" method="post">
-              {% csrf_token %}
-              {% bootstrap_form commForm %}
-              <input type="text" placeholder="Add Comment...">
-              <button type="submit" class="ui small button violet inverted " style="padding-right: 4px;padding-left: 4px;">Comment</button>
-            </form>
+          <div class="ui grid">
+            <div class="eight wide column">
+              <form class="ui form" method="post" action="{% url 'comment' event_id=event.pk %}" placeholder="Add Comment...">
+                {% csrf_token %}
+                {% bootstrap_form commForm %}
+                <button type="submit" class="ui small button violet inverted " style="padding-right: 4px;padding-left: 4px;">Comment</button>
+              </form>
+            </div>
+            <div class="eight wide column">
+              <h4 class="ui header">Previous Comments</h4>
+              <hr>
+                {% for c in event.comments.all %}
+                {{c.comment}}
+                {%endfor%}
+
+            </div>
           </div>
         </div>
       {% endfor %}

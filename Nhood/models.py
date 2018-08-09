@@ -69,7 +69,7 @@ class Event(models.Model):
 
 class Comment(models.Model):
     comment = models.TextField()
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event")
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="comments")
 
     @classmethod
     def get_comments(cls,event_id):
