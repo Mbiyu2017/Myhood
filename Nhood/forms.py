@@ -15,3 +15,8 @@ class EventForm(ModelForm):
     class Meta:
         model = Event
         exclude = ['poster','nhood']
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ['event']

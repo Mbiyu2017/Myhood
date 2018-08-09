@@ -66,3 +66,11 @@ class Event(models.Model):
 
     def __str__(cls):
         return cls.name
+
+class Comment(models.Model):
+    comment = models.TextField()
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="comments")
+
+    @classmethod
+    def get_comments(cls,event_id):
+        return cls.objects.filter(event=event_id)

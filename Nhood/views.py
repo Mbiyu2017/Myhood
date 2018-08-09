@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import *
 
@@ -23,9 +23,12 @@ def index(request):
 def join_nhood(request, n_id):
     nhood = Neighbourhood.join_nhood(n_id)
     events = Event.get_events()
+    
     form = EventForm()
+    commForm = CommentForm()
     current_user = request.user
     if request.method == 'POST':
+        commForm = CommentForm(request.POST)
         form = EventForm(request.POST,request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
@@ -33,8 +36,8 @@ def join_nhood(request, n_id):
             event.poster = current_user
             event.save()
             form = EventForm()
-        return render(request, 'nhood.html', {"nhood":nhood,"form":form})
-    return render(request, 'nhood.html', {"nhood":nhood,"form":form,"events":events})
+        return render(request, 'nhood.html', {"nhood":nhood,"form":form,"commForm":commForm})
+    return render(request, 'nhood.html', {"nhood":nhood,"form":form,"commForm":commForm,"events":events})
 
 @login_required(login_url='/accounts/login/')
 def userprofile(request):
@@ -56,3 +59,14 @@ def search(request):
         businesses = Business.search_business(term)
         print(businesses,term)
         return render(request, 'search.html',{"businesses":businesses})
+
+def comment(request,event_id):
+    event=Event.objects.get(pk=event_id)
+    if request.method == 'POST':
+        commForm = CommentForm(request.POST)
+        comment = commForm.save(commit=False)
+        comment.event = event
+        comment.save()
+        commForm = CommentForm()
+
+        return redirect(join_nhood,n_id=event.nhood.id)
