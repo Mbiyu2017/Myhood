@@ -31,7 +31,7 @@
   </div>
   {% endif %}
   <div class="ui grid">
-    <div class="five wide column ui raised segment" style="margin:20px;">
+    <div class="five wide column ui raised segment" style="margin:20px;height: 600px;">
       <h3 class="ui header">Do you know anything happening in {{nhood.name}}?</h3>
       <h4 class="ui header">Feel free to post it here</h4>
       <form class="ui form" action="{% url 'join_nhood' n_id=nhood.pk %}" method="post" enctype="multipart/form-data">
