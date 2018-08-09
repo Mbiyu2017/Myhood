@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  {% include 'navbar.html' %}
+
+<div class="ui raised segment" style="margin:60px;">
+  <h3 class="ui header center aligned">{{user.username|upper}}'s Profile</h3>
+  <hr>
+  <div class="ui grid">
+     <div class="six wide column ui raised segment" style="margin:10px;">
+       <h4 class="ui header">Do you own a business?</h4>
+       <h6 class="ui header">Add it here <i class="hand point down icon"></i></h6>
+       <form class="ui form" action="{% url 'userprofile' %}" method="post">
+          {% csrf_token%}
+          {% bootstrap_form form%}
+          <button type="sumbit" class="ui button inverted violet">Add my Business</button>
+       </form>
+
+     </div>
+     <div class="ten wide column">
+
+     </div>
+  </div>
+
+</div>
+{% endblock %}

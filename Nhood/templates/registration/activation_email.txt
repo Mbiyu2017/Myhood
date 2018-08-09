@@ -1,0 +1,6 @@
+We're happy to see you here {{user}}!
+You'll get to know what is happening in your neighbour hood at any time.
+User this link http://{{ site.domain }}{% url 'registration_activate' activation_key %} to activate your account.
+
+NB
+This link will expire in {{expiration_days}} if not user
