@@ -57,7 +57,14 @@
           <div class="content">
             {{event.details}}
           </div>
-
+          <div class="content">
+            <form class="ui large transparent left icon input" method="post">
+              {% csrf_token %}
+              {% bootstrap_form commForm %}
+              <input type="text" placeholder="Add Comment...">
+              <button type="submit" class="ui small button violet inverted " style="padding-right: 4px;padding-left: 4px;">Comment</button>
+            </form>
+          </div>
         </div>
       {% endfor %}
     </div>
